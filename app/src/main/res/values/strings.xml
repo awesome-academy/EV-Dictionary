@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">EV-Dictionary</string>
+    <!--home-->
+    <string name="home_ev_dictionary">EV - Dictionary</string>
+    <string name="home_hint_search">Type something here</string>
+    <string name="home_vietnamese_english_dictionary">Vietnamese English Dictionary</string>
+    <string name="home_translate_text">Translate text</string>
+    <string name="home_important_words">Important words</string>
+    <string name="home_your_words">Your words</string>
+    <string name="home_recent_words">Recent words</string>
+    <string name="home_settings">Settings</string>
 </resources>
