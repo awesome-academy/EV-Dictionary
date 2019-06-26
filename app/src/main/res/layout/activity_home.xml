@@ -1,305 +1,314 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:background="@color/color_blue_800"
-            android:padding="@dimen/dp_8"
-            android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/frameBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_blue_800"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-                android:text="@string/home_ev_dictionary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView"
-                android:textColor="@color/color_yellow_700"
-                android:textStyle="bold"
-                style="@style/TextAppearance.AppCompat.Display1"
-                android:layout_margin="@dimen/dp_16"/>
+    <TextView
+        android:id="@+id/textTitle"
+        style="@style/TextAppearance.AppCompat.Display1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_16"
+        android:gravity="center"
+        android:text="@string/home_ev_dictionary"
+        android:textColor="@color/color_yellow_700"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/textSearch"
+        style="@android:style/TextAppearance.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_16"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_textfield_default_holo_dark"
+        android:backgroundTint="@color/color_white_trans_50"
+        android:drawableLeft="@drawable/ic_search_white"
+        android:drawablePadding="@dimen/dp_8"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:hint="@string/home_hint_search"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingRight="@dimen/dp_40"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/color_white_trans_50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTitle"
+        tools:ignore="RtlHardcoded,RtlSymmetry,UnusedAttribute"
+        tools:targetApi="lollipop" />
 
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:inputType="text"
-                    android:background="@drawable/bg_textfield_default_holo_dark"
-                    android:backgroundTint="@color/color_white_trans_50"
-                    android:hint="@string/home_hint_search"
-                    style="@android:style/TextAppearance.Medium"
-                    android:gravity="center_vertical"
-                    android:textColorHint="@color/color_white_trans_50"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textColor="@android:color/white"
-                    android:layout_alignParentLeft="true"
-                    android:drawablePadding="@dimen/dp_8"
-                    android:layout_toLeftOf="@id/buttonMicrophone"
-                    android:id="@+id/editText"
-                    android:drawableLeft="@drawable/ic_search_white"
-                    tools:targetApi="o"
-                    tools:ignore="RtlHardcoded"
-                    android:importantForAutofill="no"/>
-
-            <ImageButton
-                    android:id="@+id/buttonMicrophone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_microphone_selector"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    tools:ignore="ContentDescription,RtlHardcoded"/>
-        </RelativeLayout>
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/buttonMicrophone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        android:background="@drawable/ic_microphone_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/textSearch"
+        app:layout_constraintEnd_toEndOf="@+id/textSearch"
+        app:layout_constraintTop_toTopOf="@+id/textSearch"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:background="@android:color/darker_gray"
-            android:layout_height="match_parent">
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSearch">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearVED"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:id="@+id/linearVED"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:layout_marginBottom="@dimen/dp_4"
-                    android:layout_marginLeft="@dimen/dp_8"
-                    android:layout_marginRight="@dimen/dp_8"
-                    android:background="@drawable/layer_card_background_selector"
-                    android:clickable="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/dp_8"
-                    android:paddingRight="@dimen/dp_8"
-                    android:focusable="true">
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginRight="@dimen/dp_8"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:background="@drawable/layer_card_background_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_8">
 
                 <ImageView
-                        android:id="@+id/imageVED"
-                        android:background="@drawable/bg_home_ic_ve_dict"
-                        android:padding="@dimen/dp_12"
-                        android:layout_width="@dimen/dp_48"
-                        android:layout_height="@dimen/dp_48"
-                        android:layout_margin="@dimen/dp_8"
-                        android:src="@drawable/ic_search_dic_white"
-                        android:scaleType="fitCenter"
-                        tools:ignore="ContentDescription"/>
+                    android:id="@+id/imageVED"
+                    android:layout_width="@dimen/dp_48"
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_margin="@dimen/dp_8"
+                    android:background="@drawable/bg_home_ic_ve_dict"
+                    android:padding="@dimen/dp_12"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_search_dic_white"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
-                        style="@android:style/TextAppearance.Medium"
-                        android:textColor="@android:color/black"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/textVED"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_8"
-                        android:layout_marginRight="@dimen/dp_8"
-                        android:text="@string/home_vietnamese_english_dictionary"/>
+                    android:id="@+id/textVED"
+                    style="@android:style/TextAppearance.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_marginRight="@dimen/dp_8"
+                    android:text="@string/home_vietnamese_english_dictionary"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:id="@+id/linearTranslateText"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:layout_marginBottom="@dimen/dp_4"
-                    android:layout_marginLeft="@dimen/dp_8"
-                    android:layout_marginRight="@dimen/dp_8"
-                    android:background="@drawable/layer_card_background_selector"
-                    android:paddingLeft="@dimen/dp_8"
-                    android:paddingRight="@dimen/dp_8"
-                    android:clickable="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="true">
+                android:id="@+id/linearTranslateText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_4"
+                android:layout_marginRight="@dimen/dp_8"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:background="@drawable/layer_card_background_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_8">
 
                 <ImageView
-                        android:id="@+id/imageTranslateText"
-                        android:background="@drawable/bg_home_ic_trans_text"
-                        android:padding="@dimen/dp_12"
-                        android:layout_width="@dimen/dp_48"
-                        android:layout_height="@dimen/dp_48"
-                        android:layout_margin="@dimen/dp_8"
-                        android:src="@drawable/ic_text_white"
-                        android:scaleType="fitCenter"
-                        tools:ignore="ContentDescription"/>
+                    android:id="@+id/imageTranslateText"
+                    android:layout_width="@dimen/dp_48"
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_margin="@dimen/dp_8"
+                    android:background="@drawable/bg_home_ic_trans_text"
+                    android:padding="@dimen/dp_12"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_text_white"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
-                        style="@android:style/TextAppearance.Medium"
-                        android:textColor="@android:color/black"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/textTranslateText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_8"
-                        android:layout_marginRight="@dimen/dp_8"
-                        android:text="@string/home_translate_text"/>
+                    android:id="@+id/textTranslateText"
+                    style="@android:style/TextAppearance.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_marginRight="@dimen/dp_8"
+                    android:text="@string/home_translate_text"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:id="@+id/linearImportantWords"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:layout_marginBottom="@dimen/dp_4"
-                    android:layout_marginLeft="@dimen/dp_8"
-                    android:layout_marginRight="@dimen/dp_8"
-                    android:background="@drawable/layer_card_background_selector"
-                    android:paddingLeft="@dimen/dp_8"
-                    android:paddingRight="@dimen/dp_8"
-                    android:clickable="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="true">
+                android:id="@+id/linearImportantWords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_4"
+                android:layout_marginRight="@dimen/dp_8"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:background="@drawable/layer_card_background_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_8">
 
                 <ImageView
-                        android:id="@+id/imageImportant"
-                        android:background="@drawable/bg_home_ic_important_words"
-                        android:padding="@dimen/dp_12"
-                        android:layout_width="@dimen/dp_48"
-                        android:layout_height="@dimen/dp_48"
-                        android:layout_margin="@dimen/dp_8"
-                        android:src="@drawable/ic_menu_white"
-                        android:scaleType="fitCenter"
-                        tools:ignore="ContentDescription"/>
+                    android:id="@+id/imageImportant"
+                    android:layout_width="@dimen/dp_48"
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_margin="@dimen/dp_8"
+                    android:background="@drawable/bg_home_ic_important_words"
+                    android:padding="@dimen/dp_12"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_menu_white"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
-                        style="@android:style/TextAppearance.Medium"
-                        android:textColor="@android:color/black"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/textImportantWords"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_8"
-                        android:layout_marginRight="@dimen/dp_8"
-                        android:text="@string/home_important_words"/>
+                    android:id="@+id/textImportantWords"
+                    style="@android:style/TextAppearance.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_marginRight="@dimen/dp_8"
+                    android:text="@string/home_important_words"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:id="@+id/linearYourWords"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:layout_marginBottom="@dimen/dp_4"
-                    android:layout_marginLeft="@dimen/dp_8"
-                    android:layout_marginRight="@dimen/dp_8"
-                    android:background="@drawable/layer_card_background_selector"
-                    android:paddingLeft="@dimen/dp_8"
-                    android:paddingRight="@dimen/dp_8"
-                    android:clickable="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="true">
+                android:id="@+id/linearYourWords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_4"
+                android:layout_marginRight="@dimen/dp_8"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:background="@drawable/layer_card_background_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_8">
 
                 <ImageView
-                        android:id="@+id/imageYourWords"
-                        android:background="@drawable/bg_home_ic_your_words"
-                        android:padding="@dimen/dp_12"
-                        android:layout_width="@dimen/dp_48"
-                        android:layout_height="@dimen/dp_48"
-                        android:layout_margin="@dimen/dp_8"
-                        android:src="@drawable/ic_star_white"
-                        android:scaleType="fitCenter"
-                        tools:ignore="ContentDescription"/>
+                    android:id="@+id/imageYourWords"
+                    android:layout_width="@dimen/dp_48"
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_margin="@dimen/dp_8"
+                    android:background="@drawable/bg_home_ic_your_words"
+                    android:padding="@dimen/dp_12"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_star_white"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
-                        style="@android:style/TextAppearance.Medium"
-                        android:textColor="@android:color/black"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/textYourWords"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_8"
-                        android:layout_marginRight="@dimen/dp_8"
-                        android:text="@string/home_your_words"/>
+                    android:id="@+id/textYourWords"
+                    style="@android:style/TextAppearance.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_marginRight="@dimen/dp_8"
+                    android:text="@string/home_your_words"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:id="@+id/lineaRecentWords"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:layout_marginBottom="@dimen/dp_4"
-                    android:layout_marginLeft="@dimen/dp_8"
-                    android:layout_marginRight="@dimen/dp_8"
-                    android:background="@drawable/layer_card_background_selector"
-                    android:paddingLeft="@dimen/dp_8"
-                    android:paddingRight="@dimen/dp_8"
-                    android:clickable="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="true">
+                android:id="@+id/linearRecentWords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_4"
+                android:layout_marginRight="@dimen/dp_8"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:background="@drawable/layer_card_background_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_8">
 
                 <ImageView
-                        android:id="@+id/imageRecentWords"
-                        android:background="@drawable/bg_home_ic_recent_words"
-                        android:padding="@dimen/dp_12"
-                        android:layout_width="@dimen/dp_48"
-                        android:layout_height="@dimen/dp_48"
-                        android:layout_margin="@dimen/dp_8"
-                        android:src="@drawable/ic_time_reverse_white"
-                        android:scaleType="fitCenter"
-                        tools:ignore="ContentDescription"/>
+                    android:id="@+id/imageRecentWords"
+                    android:layout_width="@dimen/dp_48"
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_margin="@dimen/dp_8"
+                    android:background="@drawable/bg_home_ic_recent_words"
+                    android:padding="@dimen/dp_12"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_time_reverse_white"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
-                        style="@android:style/TextAppearance.Medium"
-                        android:textColor="@android:color/black"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/textRecentWords"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_8"
-                        android:layout_marginRight="@dimen/dp_8"
-                        android:text="@string/home_recent_words"/>
+                    android:id="@+id/textRecentWords"
+                    style="@android:style/TextAppearance.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_marginRight="@dimen/dp_8"
+                    android:text="@string/home_recent_words"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:id="@+id/linearSettings"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:layout_marginBottom="@dimen/dp_4"
-                    android:layout_marginLeft="@dimen/dp_8"
-                    android:layout_marginRight="@dimen/dp_8"
-                    android:background="@drawable/layer_card_background_selector"
-                    android:paddingLeft="@dimen/dp_8"
-                    android:paddingRight="@dimen/dp_8"
-                    android:clickable="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="true">
+                android:id="@+id/linearSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_4"
+                android:layout_marginRight="@dimen/dp_8"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:background="@drawable/layer_card_background_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_8">
 
                 <ImageView
-                        android:id="@+id/imageSettings"
-                        android:background="@drawable/bg_home_ic_settings"
-                        android:padding="@dimen/dp_12"
-                        android:layout_width="@dimen/dp_48"
-                        android:layout_height="@dimen/dp_48"
-                        android:layout_margin="@dimen/dp_8"
-                        android:src="@drawable/ic_settings_white"
-                        android:scaleType="fitCenter"
-                        tools:ignore="ContentDescription"/>
+                    android:id="@+id/imageSettings"
+                    android:layout_width="@dimen/dp_48"
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_margin="@dimen/dp_8"
+                    android:background="@drawable/bg_home_ic_settings"
+                    android:padding="@dimen/dp_12"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_settings_white"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
-                        style="@android:style/TextAppearance.Medium"
-                        android:textColor="@android:color/black"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/textSettings"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_8"
-                        android:layout_marginRight="@dimen/dp_8"
-                        android:text="@string/home_settings"/>
+                    android:id="@+id/textSettings"
+                    style="@android:style/TextAppearance.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_marginRight="@dimen/dp_8"
+                    android:text="@string/home_settings"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
