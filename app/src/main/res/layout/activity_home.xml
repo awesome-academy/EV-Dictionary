@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/frameBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_blue_800"
+        app:layout_constraintBottom_toTopOf="@id/scrollMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textTitle"
+        style="@style/TextAppearance.AppCompat.Display1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_16"
+        android:gravity="center"
+        android:text="@string/home_ev_dictionary"
+        android:textColor="@color/color_yellow_700"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/textSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/textSearch"
+        style="@android:style/TextAppearance.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_16"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_textfield_default_holo_dark"
+        android:backgroundTint="@color/color_white_trans_50"
+        android:drawableLeft="@drawable/ic_search_white"
+        android:drawablePadding="@dimen/dp_8"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:hint="@string/home_hint_search"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingRight="@dimen/dp_40"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/color_white_trans_50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTitle"
+        tools:ignore="RtlHardcoded,RtlSymmetry,UnusedAttribute"
+        tools:targetApi="lollipop" />
+
+    <ImageButton
+        android:id="@+id/buttonMicrophone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        android:background="@drawable/ic_microphone_selector"
+        app:layout_constraintBottom_toBottomOf="@id/textSearch"
+        app:layout_constraintEnd_toEndOf="@id/textSearch"
+        app:layout_constraintTop_toTopOf="@id/textSearch"
+        tools:ignore="ContentDescription,RtlHardcoded" />
+
+    <ScrollView
+        android:id="@+id/scrollMenu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textSearch">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textVED"
+                style="@style/HomeTextMenu"
+                android:drawableLeft="@drawable/ic_search_dic_layer_list"
+                android:text="@string/home_vietnamese_english_dictionary"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/textTranslateText"
+                style="@style/HomeTextMenu"
+                android:drawableLeft="@drawable/ic_text_layer_list"
+                android:text="@string/home_translate_text"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/textImportantWords"
+                style="@style/HomeTextMenu"
+                android:drawableLeft="@drawable/ic_menu_layer_list"
+                android:text="@string/home_important_words"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/textYourWords"
+                style="@style/HomeTextMenu"
+                android:drawableLeft="@drawable/ic_star_layer_list"
+                android:text="@string/home_your_words"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/textRecentWords"
+                style="@style/HomeTextMenu"
+                android:drawableLeft="@drawable/ic_time_reverse_layer_list"
+                android:text="@string/home_recent_words"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/textSettings"
+                style="@style/HomeTextMenu"
+                android:drawableLeft="@drawable/ic_settings_layer_list"
+                android:text="@string/home_settings"
+                tools:ignore="RtlHardcoded" />
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
