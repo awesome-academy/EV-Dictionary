@@ -17,4 +17,5 @@ object Constants {
     const val WORD_REPLACE_ENDLINE = "\n"
     const val EN_WORD_REPLACE_EG_EN = "\nE.g. "
     const val EN_WORD_REPLACE_EG_VI = "\n=>"
+    const val PREF_ENGLISH_WORDS = "PREF_ENGLISH_WORDS"
 }
