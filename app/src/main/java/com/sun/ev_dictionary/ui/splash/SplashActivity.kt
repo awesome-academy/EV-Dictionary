@@ -4,8 +4,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.sun.ev_dictionary.R
 import com.sun.ev_dictionary.base.BaseActivity
-import com.sun.ev_dictionary.data.source.local.EnglishWordDatabase
 import com.sun.ev_dictionary.data.source.local.EnglishWordsLocalDataSource
+import com.sun.ev_dictionary.data.source.local.WordDatabase
 import com.sun.ev_dictionary.data.source.repository.EnglishWordsRepository
 import com.sun.ev_dictionary.databinding.ActivitySplashBinding
 import com.sun.ev_dictionary.ui.home.HomeActivity
@@ -14,20 +14,19 @@ import com.sun.ev_dictionary.utils.SharedPreference
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     private lateinit var viewModel: SplashViewModel
-    private lateinit var viewModelFactory: SplashViewModelFactory
-    private lateinit var sharedPreference: SharedPreference
+
     override fun getLayoutResource(): Int = R.layout.activity_splash
 
     override fun initData() {
-        sharedPreference = SharedPreference(this)
+        val sharedPreference = SharedPreference(this)
         val bufferedReadable = applicationContext.assets
             .open(Constants.FILE_NAME_EV)
             .bufferedReader()
-        viewModelFactory = SplashViewModelFactory(
+        val viewModelFactory = SplashViewModelFactory(
             EnglishWordsRepository.getInstance(
                 EnglishWordsLocalDataSource.getInstance(
                     bufferedReadable,
-                    EnglishWordDatabase.getInstance(this).englishWordDao,
+                    WordDatabase.getInstance(this).englishWordDao,
                     sharedPreference
                 )
             )
@@ -47,9 +46,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         viewModel.onStart()
     }
 
-    override fun onStop() {
-        super.onStop()
-        viewModel.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.onDestroy()
     }
 
     private fun navigateToHomeScreen() {

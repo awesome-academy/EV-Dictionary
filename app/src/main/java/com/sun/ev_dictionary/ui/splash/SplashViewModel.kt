@@ -37,7 +37,7 @@ class SplashViewModel(
         }
     }
 
-    override fun onStop() {
+    override fun onDestroy() {
         compositeDisposable.clear()
     }
 
