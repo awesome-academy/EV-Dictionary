@@ -2,6 +2,8 @@ package com.sun.ev_dictionary.data.source.local
 
 import com.sun.ev_dictionary.data.model.EnglishWord
 import com.sun.ev_dictionary.data.source.EnglishWordsDataSource
+import com.sun.ev_dictionary.data.source.local.dao.EnglishWordDao
+import com.sun.ev_dictionary.utils.Constants
 import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_1
 import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_2
 import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_3_END
@@ -9,28 +11,39 @@ import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_3_START
 import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_4_END
 import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_5_END
 import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_5_START
+import com.sun.ev_dictionary.utils.SharedPreference
 import com.sun.ev_dictionary.utils.StringUtils
 import io.reactivex.Observable
-import io.reactivex.Single
 import java.io.BufferedReader
-import java.util.concurrent.Callable
 
 class EnglishWordsLocalDataSource private constructor(
-    private val bufferedReader: BufferedReader
+    private val bufferedReader: BufferedReader,
+    private val englishWordDao: EnglishWordDao,
+    private val sharedPreference: SharedPreference
 ) : EnglishWordsDataSource.Local {
 
-    override fun getWordsFromTextFile(): Single<List<EnglishWord>> {
-        return Observable.fromCallable(Callable<List<String>> {
+    private var _numberOfWords = 0
+
+    override fun getWordCount(): Int = _numberOfWords
+
+    override fun getWordsFromTextFile(): Observable<Boolean> {
+        return Observable.fromCallable {
             getLines(bufferedReader)
-        })
+        }
             .flatMapIterable { lines -> lines }
             .map { line -> convertLineToEnglishWord(line) }
-            .toList()
+            .map { englishWord -> insertWordsToDatabase(englishWord) }
     }
+
+    override fun saveInsertedState() =
+        sharedPreference.save(Constants.PREF_ENGLISH_WORDS, true)
+
+    override fun getInsertedState(): Boolean =
+        sharedPreference.getValueBoolean(Constants.PREF_ENGLISH_WORDS, false)
 
     private fun getLines(bufferedReader: BufferedReader): List<String> {
         bufferedReader.useLines { lines ->
-            return lines.toList()
+            return lines.toList().also { _numberOfWords = it.size }
         }
     }
 
@@ -95,13 +108,28 @@ class EnglishWordsLocalDataSource private constructor(
 
         }
 
+    private fun insertWordsToDatabase(englishWord: EnglishWord): Boolean {
+        englishWord.let {
+            englishWordDao.insertWord(it)
+            return true
+        }
+    }
+
     companion object {
         private var INSTANCE: EnglishWordsLocalDataSource? = null
 
         @JvmStatic
-        fun getInstance(bufferedReader: BufferedReader): EnglishWordsLocalDataSource {
+        fun getInstance(
+            bufferedReader: BufferedReader,
+            englishWordDao: EnglishWordDao,
+            sharedPreference: SharedPreference
+        ): EnglishWordsLocalDataSource {
             return INSTANCE ?: synchronized(EnglishWordsLocalDataSource::class.java) {
-                val instance = EnglishWordsLocalDataSource(bufferedReader)
+                val instance = EnglishWordsLocalDataSource(
+                    bufferedReader,
+                    englishWordDao,
+                    sharedPreference
+                )
                 INSTANCE = instance
                 instance
             }

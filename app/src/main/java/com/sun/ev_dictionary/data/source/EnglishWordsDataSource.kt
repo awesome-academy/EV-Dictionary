@@ -1,10 +1,12 @@
 package com.sun.ev_dictionary.data.source
 
-import com.sun.ev_dictionary.data.model.EnglishWord
-import io.reactivex.Single
+import io.reactivex.Observable
 
 interface EnglishWordsDataSource {
     interface Local {
-        fun getWordsFromTextFile(): Single<List<EnglishWord>>
+        fun getWordsFromTextFile(): Observable<Boolean>
+        fun getWordCount(): Int
+        fun saveInsertedState()
+        fun getInsertedState(): Boolean
     }
 }
