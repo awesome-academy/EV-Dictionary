@@ -113,7 +113,6 @@ class EnglishWordsLocalDataSource private constructor(
             englishWordDao.insertWord(it)
             return true
         }
-
     }
 
     companion object {
