@@ -14,5 +14,8 @@
     <string name="splash_text_vietnamese">Vietnamese</string>
     <string name="splash_text_english">English</string>
     <string name="splash_percent_zero">0 %</string>
-</resources>
+    <!--activity_common_search-->
+    <string name="common_hint_search">Search</string>
+    <string name="common_text_actionbar_title">Common ActionBar Title</string>
 
+</resources>
