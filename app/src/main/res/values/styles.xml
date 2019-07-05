@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -26,6 +26,18 @@
         <item name="android:paddingLeft">@dimen/dp_16</item>
         <item name="android:paddingRight">@dimen/dp_16</item>
         <item name="android:drawablePadding">@dimen/dp_16</item>
+    </style>
+
+    <style name="SplashTextView">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:layout_margin">@dimen/dp_8</item>
+    </style>
+
+    <style name="SplashHorizontalProgressBar" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:backgroundTint" tools:targetApi="lollipop">@android:color/white</item>
+        <item name="android:progressTint" tools:targetApi="lollipop">@color/color_yellow_700</item>
+        <item name="android:scaleY">@dimen/scale_3</item>
     </style>
 
 </resources>
