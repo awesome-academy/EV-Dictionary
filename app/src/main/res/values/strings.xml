@@ -9,4 +9,10 @@
     <string name="home_your_words">Your words</string>
     <string name="home_recent_words">Recent words</string>
     <string name="home_settings">Settings</string>
+    <!--splash-->
+    <string name="splash_text_please_wait">We are doing first setup. Please waiting for some minutes &#8230;</string>
+    <string name="splash_text_vietnamese">Vietnamese</string>
+    <string name="splash_text_english">English</string>
+    <string name="splash_percent_zero">0 %</string>
 </resources>
+

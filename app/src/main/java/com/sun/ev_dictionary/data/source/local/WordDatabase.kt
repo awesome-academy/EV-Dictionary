@@ -5,12 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.sun.ev_dictionary.data.model.EnglishWord
+import com.sun.ev_dictionary.data.model.VietnameseWord
 import com.sun.ev_dictionary.data.source.local.WordDatabase.Companion.VERSION_DATABASE
 import com.sun.ev_dictionary.data.source.local.dao.EnglishWordDao
+import com.sun.ev_dictionary.data.source.local.dao.VietnameseWordDao
 
-@Database(entities = [EnglishWord::class], version = VERSION_DATABASE)
+@Database(entities = [EnglishWord::class, VietnameseWord::class], version = VERSION_DATABASE)
 abstract class WordDatabase : RoomDatabase() {
     abstract val englishWordDao: EnglishWordDao
+    abstract val vietnameseWordDao: VietnameseWordDao
 
     companion object {
         private const val WORD_DB = "word.db"
