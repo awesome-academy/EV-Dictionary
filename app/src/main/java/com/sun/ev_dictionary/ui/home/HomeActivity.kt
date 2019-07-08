@@ -103,17 +103,17 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), OnWordSearchClickListe
         fun getIntent(context: Context) = Intent(context, HomeActivity::class.java)
 
         fun getIntentSpeech(context: Context): Intent {
-            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-            intent.putExtra(
-                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-            )
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-            intent.putExtra(
-                RecognizerIntent.EXTRA_PROMPT,
-                context.getString(R.string.home_text_promt)
-            )
-            return intent
+            return Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                )
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+                putExtra(
+                    RecognizerIntent.EXTRA_PROMPT,
+                    context.getString(R.string.home_text_promt)
+                )
+            }
         }
     }
 }

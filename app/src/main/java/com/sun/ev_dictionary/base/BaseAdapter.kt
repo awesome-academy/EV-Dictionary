@@ -12,27 +12,26 @@ class BaseAdapter<T> constructor(
     private val context: Context,
     private val layoutResource: Int,
     private val listener: OnItemClickListener
-) : RecyclerView.Adapter<BaseAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<BaseAdapter.ViewHolder<T>>() {
 
     private var items = emptyList<T>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<T> =
         ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(context),
                 layoutResource,
                 parent,
                 false
-            )
+            ),
+            listener
         )
 
     override fun getItemCount(): Int {
         return items.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.viewBinding.setVariable(BR.data, items[position])
-        holder.viewBinding.setVariable(BR.listener, listener)
-        holder.viewBinding.executePendingBindings()
+    override fun onBindViewHolder(holder: ViewHolder<T>, position: Int) {
+        holder.bindData(items)
     }
 
     fun setItems(items: List<T>) {
@@ -40,7 +39,17 @@ class BaseAdapter<T> constructor(
         notifyDataSetChanged()
     }
 
-    class ViewHolder(val viewBinding: ViewDataBinding) : RecyclerView.ViewHolder(viewBinding.root)
+    class ViewHolder<T>(
+        private val viewBinding: ViewDataBinding,
+        private val listener: OnItemClickListener
+    ) : RecyclerView.ViewHolder(viewBinding.root) {
+
+        fun bindData(items: List<T>) {
+            viewBinding.setVariable(BR.data, items[adapterPosition])
+            viewBinding.setVariable(BR.listener, listener)
+            viewBinding.executePendingBindings()
+        }
+    }
 
     interface OnItemClickListener
 }

@@ -22,8 +22,6 @@ class EnglishWordsLocalDataSource private constructor(
     private val englishWordDao: EnglishWordDao,
     private val sharedPreference: SharedPreference?
 ) : EnglishWordsDataSource.Local {
-    override fun getSearchingWords(query: String?): Single<List<EnglishWord>> =
-        englishWordDao.queryWord(query)
 
     private var _numberOfWords = 0
 
@@ -37,6 +35,9 @@ class EnglishWordsLocalDataSource private constructor(
             .map { line -> convertLineToEnglishWord(line) }
             .map { englishWord -> insertWordsToDatabase(englishWord) }
     }
+
+    override fun getSearchingWords(query: String?): Single<List<EnglishWord>> =
+        englishWordDao.queryWord(query)
 
     override fun saveInsertedState() =
         sharedPreference?.save(Constants.PREF_ENGLISH_WORDS, true)

@@ -10,7 +10,7 @@ class EVSearchResultViewModel : ViewModel() {
     val englishWord: LiveData<EnglishWord>
         get() = _englishWord
 
-    fun setEnglishWord(englishWord: EnglishWord){
+    fun setEnglishWord(englishWord: EnglishWord) {
         _englishWord.value = englishWord
     }
 }
