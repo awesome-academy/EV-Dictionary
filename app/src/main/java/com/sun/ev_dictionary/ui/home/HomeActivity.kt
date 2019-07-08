@@ -7,6 +7,7 @@ import android.speech.RecognizerIntent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.sun.ev_dictionary.R
 import com.sun.ev_dictionary.base.BaseActivity
 import com.sun.ev_dictionary.base.BaseAdapter
@@ -79,6 +80,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), OnWordSearchClickListe
             this, R.layout.item_search_english_word, this
         )
         recyclerWords.adapter = wordSearchAdapter
+        recyclerWords.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         viewModel.englishWords.observe(this, Observer {
             if (it == null) {
                 recyclerWords.visibility = View.GONE

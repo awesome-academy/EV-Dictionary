@@ -9,7 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class HomeViewModel(
+open class HomeViewModel(
     private val englishWordsRepository: EnglishWordsRepository
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()

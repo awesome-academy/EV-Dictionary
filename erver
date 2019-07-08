@@ -1,0 +1,33 @@
+[33m5a80d5e[m[33m ([m[1;36mHEAD -> [m[1;32mtask_13801[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m Merge pull request #10 from canhtv-0838/task_13802
+[33m5c66cc5[m[33m ([m[1;31mmine/task_13802[m[33m, [m[1;32mtask_13802[m[33m)[m Task 13802: Pronounce english word and chage UI for long words
+[33me1eff1f[m Merge pull request #9 from canhtv-0838/task_13797
+[33mdcfa581[m[33m ([m[1;31mmine/task_13797[m[33m, [m[1;32mtask_13797[m[33m)[m Fix comment 2nd
+[33m85a0853[m Fix comment 1st
+[33mac7e191[m Task 13797 Search and navigate to EV Search Result Screen
+[33m624b3e6[m Merge pull request #8 from canhtv-0838/task_13806
+[33m0654298[m Task 13806 Create UI of VE Search Screen
+[33ma69661f[m Merge pull request #7 from canhtv-0838/task_13807
+[33mfbd90e6[m Task 13807 Insert data from file to local database for VE Search Screen and create UI for splash screen
+[33mf3be303[m Merge pull request #6 from canhtv-0838/task_13808
+[33mb61fb90[m Task 13808 Create UI of EV Search Result Screen
+[33m2f2f5d7[m Merge pull request #5 from canhtv-0838/task_13868
+[33m0e6f021[m Fix comment 1st
+[33md3e7c3b[m Task 13868 Insert EV data from file to local database
+[33maa124e5[m Merge pull request #4 from canhtv-0838/task_13800
+[33mdff2200[m Fix comment 1st and have some changes
+[33m6488883[m Task 13800 Get data for ev search from txt file
+[33m2d9124f[m Merge pull request #3 from canhtv-0838/task_13809
+[33m20b4939[m fix comment 2nd
+[33md68feae[m Fix comment 1st
+[33ma78fbd4[m Task 13809 Create UI of EV Home Screen
+[33m0290b91[m Merge pull request #2 from canhtv-0838/task_13793
+[33m15ef3a2[m[33m ([m[1;31mmine/task_13793[m[33m)[m Fix comment 1st
+[33m69a7769[m Task 13793 Add resource. Fix lint in next pull
+[33m2974dc5[m Merge pull request #1 from canhtv-0838/task_13794
+[33ma304ac6[m Initiate project
+[33m9f208c9[m Delete config.yml
+[33m17cbe12[m Create config.yml
+[33me2b2ebd[m Create pull_request_template.md
+[33m39a0f48[m Create config.yml
+[33m9e3dd3a[m Update README.md
+[33m23f11fe[m Initial commit
