@@ -45,8 +45,8 @@ class SplashViewModel(
     }
 
     override fun onStart() {
-        if (!englishWordsRepository.getInsertedState()
-            && !vietnameseWordsRepository.getInsertedState()
+        if (!englishWordsRepository.getInsertedState()!!
+            && !vietnameseWordsRepository.getInsertedState()!!
         ) {
             getEnglishData()
             getVietnameseData()

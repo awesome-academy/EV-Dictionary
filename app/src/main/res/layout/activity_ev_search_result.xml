@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sun.ev_dictionary.ui.ev_search_result.EVSearchResultViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -27,6 +34,7 @@
             android:layout_marginTop="@dimen/dp_16"
             android:layout_marginBottom="@dimen/dp_8"
             android:textStyle="bold"
+            android:text="@{viewModel.englishWord.word}"
             app:layout_constraintBottom_toTopOf="@id/textMeaning"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbarEVResult" />
@@ -39,6 +47,7 @@
             android:layout_marginStart="@dimen/dp_4"
             android:layout_marginLeft="@dimen/dp_4"
             android:layout_marginEnd="@dimen/dp_8"
+            android:text="@{viewModel.englishWord.pronunciation}"
             android:layout_marginRight="@dimen/dp_8"
             app:layout_constraintBottom_toBottomOf="@id/textWord"
             app:layout_constraintEnd_toStartOf="@id/buttonSpeaker"
@@ -51,6 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/dp_8"
+            android:text="@{viewModel.englishWord.meaning}"
             android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
