@@ -14,13 +14,16 @@ import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_5_START
 import com.sun.ev_dictionary.utils.SharedPreference
 import com.sun.ev_dictionary.utils.StringUtils
 import io.reactivex.Observable
+import io.reactivex.Single
 import java.io.BufferedReader
 
 class EnglishWordsLocalDataSource private constructor(
-    private val bufferedReader: BufferedReader,
+    private val bufferedReader: BufferedReader?,
     private val englishWordDao: EnglishWordDao,
-    private val sharedPreference: SharedPreference
+    private val sharedPreference: SharedPreference?
 ) : EnglishWordsDataSource.Local {
+    override fun getSearchingWords(query: String?): Single<List<EnglishWord>> =
+        englishWordDao.queryWord(query)
 
     private var _numberOfWords = 0
 
@@ -28,7 +31,7 @@ class EnglishWordsLocalDataSource private constructor(
 
     override fun getWordsFromTextFile(): Observable<Boolean> {
         return Observable.fromCallable {
-            getLines(bufferedReader)
+            bufferedReader?.let { getLines(it) }
         }
             .flatMapIterable { lines -> lines }
             .map { line -> convertLineToEnglishWord(line) }
@@ -36,10 +39,10 @@ class EnglishWordsLocalDataSource private constructor(
     }
 
     override fun saveInsertedState() =
-        sharedPreference.save(Constants.PREF_ENGLISH_WORDS, true)
+        sharedPreference?.save(Constants.PREF_ENGLISH_WORDS, true)
 
-    override fun getInsertedState(): Boolean =
-        sharedPreference.getValueBoolean(Constants.PREF_ENGLISH_WORDS, false)
+    override fun getInsertedState(): Boolean? =
+        sharedPreference?.getValueBoolean(Constants.PREF_ENGLISH_WORDS, false)
 
     private fun getLines(bufferedReader: BufferedReader): List<String> {
         bufferedReader.useLines { lines ->
@@ -120,9 +123,9 @@ class EnglishWordsLocalDataSource private constructor(
 
         @JvmStatic
         fun getInstance(
-            bufferedReader: BufferedReader,
+            bufferedReader: BufferedReader?,
             englishWordDao: EnglishWordDao,
-            sharedPreference: SharedPreference
+            sharedPreference: SharedPreference?
         ): EnglishWordsLocalDataSource {
             return INSTANCE ?: synchronized(EnglishWordsLocalDataSource::class.java) {
                 val instance = EnglishWordsLocalDataSource(
