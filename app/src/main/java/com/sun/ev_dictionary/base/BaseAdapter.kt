@@ -31,7 +31,7 @@ class BaseAdapter<T> constructor(
     }
 
     override fun onBindViewHolder(holder: ViewHolder<T>, position: Int) {
-        holder.bindData(items)
+        holder.bindData(items[position])
     }
 
     fun setItems(items: List<T>) {
@@ -44,8 +44,8 @@ class BaseAdapter<T> constructor(
         private val listener: OnItemClickListener
     ) : RecyclerView.ViewHolder(viewBinding.root) {
 
-        fun bindData(items: List<T>) {
-            viewBinding.setVariable(BR.data, items[adapterPosition])
+        fun bindData(item: T) {
+            viewBinding.setVariable(BR.data, item)
             viewBinding.setVariable(BR.listener, listener)
             viewBinding.executePendingBindings()
         }
