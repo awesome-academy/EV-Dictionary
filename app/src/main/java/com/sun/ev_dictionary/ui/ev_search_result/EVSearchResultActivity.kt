@@ -50,12 +50,15 @@ class EVSearchResultActivity : BaseActivity<ActivityEvSearchResultBinding>(),
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_ev_search_result, menu)
-        searchItem = menu!!.findItem(R.id.actionSearch)
+        searchItem = menu?.findItem(R.id.actionSearch) ?: return false
         val searchView: SearchView = searchItem.actionView as SearchView
         val searchEditText: EditText =
             searchView.findViewById(androidx.appcompat.R.id.search_src_text)
-        searchEditText.setTextColor(Color.WHITE)
-        searchEditText.setHintTextColor(Color.DKGRAY)
+
+        searchEditText.apply {
+            setTextColor(Color.WHITE)
+            setHintTextColor(Color.DKGRAY)
+        }
         searchView.setOnQueryTextListener(this)
         return true
     }
