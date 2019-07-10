@@ -22,23 +22,23 @@
             android:background="@color/color_blue_800"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{viewModel.englishWord.word}"
+            app:titleTextColor="@android:color/white" />
 
         <TextView
             android:id="@+id/textWord"
             style="@android:style/TextAppearance.Medium"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_8"
-            android:layout_marginRight="@dimen/dp_8"
             android:layout_marginBottom="@dimen/dp_8"
             android:text="@{viewModel.englishWord.word}"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/textMeaning"
-            app:layout_constraintEnd_toStartOf="@+id/buttonSpeaker"
+            app:layout_constraintEnd_toStartOf="@id/textPronunciation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbarEVResult" />
 
@@ -95,6 +95,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbarEVResult"
             tools:ignore="ContentDescription" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerWords"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@android:color/white"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/toolbarEVResult"
+            app:layout_constraintStart_toStartOf="@id/toolbarEVResult"
+            app:layout_constraintTop_toBottomOf="@id/toolbarEVResult"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

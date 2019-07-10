@@ -18,5 +18,6 @@
     <!--activity_common_search-->
     <string name="common_hint_search">Search</string>
     <string name="common_text_actionbar_title">Common ActionBar Title</string>
+    <string name="action_search">menu_action_search</string>
 
- </resources>
+</resources>

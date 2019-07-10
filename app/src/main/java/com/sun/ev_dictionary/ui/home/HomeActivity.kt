@@ -7,6 +7,7 @@ import android.speech.RecognizerIntent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.sun.ev_dictionary.R
 import com.sun.ev_dictionary.base.BaseActivity
 import com.sun.ev_dictionary.base.BaseAdapter
@@ -26,18 +27,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), OnWordSearchClickListe
     override fun getLayoutResource(): Int = R.layout.activity_home
 
     override fun initData() {
-        val viewModelFactory = HomeViewModelFactory(
-            EnglishWordsRepository.getInstance(
-                EnglishWordsLocalDataSource.getInstance(
-                    null,
-                    WordDatabase.getInstance(this).englishWordDao,
-                    null
-                )
-            )
-        )
-        viewModel = ViewModelProviders.of(this, viewModelFactory)
-            .get(HomeViewModel::class.java)
-        binding.viewModel = viewModel
+        initViewModel()
         setWordsSearchAdapter()
         setEventClick()
     }
@@ -60,25 +50,35 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), OnWordSearchClickListe
         }
     }
 
-    private fun setTextSearch(text: String) {
-        textSearch.setText(text)
-    }
-
     override fun onStop() {
         super.onStop()
-        binding.textSearch.text.clear()
+        textSearch.text.clear()
         recyclerWords.visibility = View.GONE
     }
 
-    private fun setEventClick() {
-        buttonMicrophone.setOnClickListener { speechToText() }
+    private fun initViewModel() {
+        val viewModelFactory = HomeViewModelFactory(
+            EnglishWordsRepository.getInstance(
+                EnglishWordsLocalDataSource.getInstance(
+                    null,
+                    WordDatabase.getInstance(this).englishWordDao,
+                    null
+                )
+            )
+        )
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(HomeViewModel::class.java)
+        binding.viewModel = viewModel
     }
 
     private fun setWordsSearchAdapter() {
         val wordSearchAdapter = BaseAdapter<EnglishWord>(
             this, R.layout.item_search_english_word, this
         )
-        recyclerWords.adapter = wordSearchAdapter
+        recyclerWords.apply {
+            adapter = wordSearchAdapter
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        }
         viewModel.englishWords.observe(this, Observer {
             if (it == null) {
                 recyclerWords.visibility = View.GONE
@@ -87,6 +87,14 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), OnWordSearchClickListe
                 wordSearchAdapter.setItems(it)
             }
         })
+    }
+
+    private fun setEventClick() {
+        buttonMicrophone.setOnClickListener { speechToText() }
+    }
+
+    private fun setTextSearch(text: String) {
+        textSearch.setText(text)
     }
 
     private fun speechToText() {
