@@ -3,7 +3,6 @@ package com.sun.ev_dictionary.ui.ev_search_result
 import android.speech.tts.TextToSpeech
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.sun.ev_dictionary.data.model.EnglishWord
 import com.sun.ev_dictionary.data.source.repository.EnglishWordsRepository
 import com.sun.ev_dictionary.ui.home.HomeViewModel

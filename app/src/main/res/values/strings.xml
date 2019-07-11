@@ -15,9 +15,10 @@
     <string name="splash_text_vietnamese">Vietnamese</string>
     <string name="splash_text_english">English</string>
     <string name="splash_percent_zero">0 %</string>
-    <!--activity_common_search-->
+    <!--fragment_common_search-->
     <string name="common_hint_search">Search</string>
     <string name="common_text_actionbar_title">Common ActionBar Title</string>
     <string name="action_search">menu_action_search</string>
-
+    <!--ve_search-->
+    <string name="ve_search_msg_no_word">Sorry. Having no word for searching</string>
 </resources>

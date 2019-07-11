@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".ui.home.HomeActivity" />
         <activity android:name=".ui.ev_search_result.EVSearchResultActivity" />
-        <activity android:name=".ui.ve_search.VESearchActivity"/>
+        <activity android:name=".ui.common.CommonActivity"/>
     </application>
 
 </manifest>

@@ -3,61 +3,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <FrameLayout
-            android:id="@+id/frameBackground"
+            android:id="@+id/frameContainer"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textActionBarTitle"
-            style="@style/CommonActionBar"
-            android:background="@color/color_green_800"
-            android:text="@string/common_text_actionbar_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/buttonBack"
-            style="@style/CommonButtonBack"
-            app:layout_constraintBottom_toBottomOf="@id/textActionBarTitle"
-            app:layout_constraintStart_toStartOf="@id/textActionBarTitle"
-            app:layout_constraintTop_toTopOf="@id/textActionBarTitle"
-            tools:ignore="ContentDescription" />
-
-        <EditText
-            android:id="@+id/textSearch"
-            style="@style/CommonSearchEditText"
-            android:layout_width="0dp"
-            android:layout_height="?android:attr/actionBarSize"
-            android:hint="@string/common_hint_search"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textActionBarTitle"
-            tools:ignore="Autofill" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerWords"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/dp_8"
-            android:background="@android:color/white"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="@id/frameBackground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textSearch" />
-
+            app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

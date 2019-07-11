@@ -16,6 +16,8 @@ import com.sun.ev_dictionary.data.source.local.EnglishWordsLocalDataSource
 import com.sun.ev_dictionary.data.source.local.WordDatabase
 import com.sun.ev_dictionary.data.source.repository.EnglishWordsRepository
 import com.sun.ev_dictionary.databinding.ActivityHomeBinding
+import com.sun.ev_dictionary.ui.common.CommonActivity
+import com.sun.ev_dictionary.ui.common.ve_search.VESearchFragment
 import com.sun.ev_dictionary.ui.ev_search_result.EVSearchResultActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
@@ -71,6 +73,15 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), OnWordSearchClickListe
         binding.viewModel = viewModel
     }
 
+    private fun setEventClick() {
+        buttonMicrophone.setOnClickListener { speechToText() }
+        textVED.setOnClickListener {
+            navigateToOtherScreen(
+                CommonActivity.getIntent(this, VESearchFragment::class.java.simpleName)
+            )
+        }
+    }
+
     private fun setWordsSearchAdapter() {
         val wordSearchAdapter = BaseAdapter<EnglishWord>(
             this, R.layout.item_search_english_word, this
@@ -89,10 +100,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), OnWordSearchClickListe
         })
     }
 
-    private fun setEventClick() {
-        buttonMicrophone.setOnClickListener { speechToText() }
-    }
-
     private fun setTextSearch(text: String) {
         textSearch.setText(text)
     }
@@ -103,6 +110,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), OnWordSearchClickListe
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    private fun navigateToOtherScreen(intent: Intent) {
+        startActivity(intent)
     }
 
     companion object {

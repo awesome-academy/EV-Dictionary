@@ -11,18 +11,20 @@ import com.sun.ev_dictionary.utils.Constants.VI_WORD_REGEX_TYPE_3_END
 import com.sun.ev_dictionary.utils.SharedPreference
 import com.sun.ev_dictionary.utils.StringUtils
 import io.reactivex.Observable
+import io.reactivex.Single
 import java.io.BufferedReader
 
 class VietnameseWordsLocalDataSource private constructor(
-    private val bufferedReader: BufferedReader,
+    private val bufferedReader: BufferedReader?,
     private val vietnameseWordDao: VietnameseWordDao,
-    private val sharedPreference: SharedPreference
+    private val sharedPreference: SharedPreference?
 ) : VietnameseWordsDataSource.Local {
+
     private var _numberOfWords = 0
 
     override fun getWordsFromTextFile(): Observable<Boolean> {
         return Observable.fromCallable {
-            getLines(bufferedReader)
+            bufferedReader?.let { getLines(it) }
         }
             .flatMapIterable { lines -> lines }
             .map { line -> convertLineToVietnameseWord(line) }
@@ -32,10 +34,13 @@ class VietnameseWordsLocalDataSource private constructor(
     override fun getWordCount(): Int = _numberOfWords
 
     override fun saveInsertedState() =
-        sharedPreference.save(Constants.PREF_VIETNAMESE_WORDS, true)
+        sharedPreference?.save(Constants.PREF_VIETNAMESE_WORDS, true)
 
-    override fun getInsertedState(): Boolean =
-        sharedPreference.getValueBoolean(Constants.PREF_VIETNAMESE_WORDS, false)
+    override fun getInsertedState(): Boolean? =
+        sharedPreference?.getValueBoolean(Constants.PREF_VIETNAMESE_WORDS, false)
+
+    override fun getSearchingWords(query: String?): Single<List<VietnameseWord>> =
+        vietnameseWordDao.queryWord(query)
 
     private fun getLines(bufferedReader: BufferedReader): List<String> {
         bufferedReader.useLines { lines ->
@@ -97,9 +102,9 @@ class VietnameseWordsLocalDataSource private constructor(
 
         @JvmStatic
         fun getInstance(
-            bufferedReader: BufferedReader,
+            bufferedReader: BufferedReader?,
             vietnameseWordDao: VietnameseWordDao,
-            sharedPreference: SharedPreference
+            sharedPreference: SharedPreference?
         ): VietnameseWordsLocalDataSource {
             return INSTANCE ?: synchronized(VietnameseWordsLocalDataSource::class.java) {
                 val instance = VietnameseWordsLocalDataSource(
