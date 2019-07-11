@@ -10,7 +10,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class VESearchViewModel(
-    private val vietnameseWordsRepository: VietnameseWordsRepository
+    private val vietnameseWordsRepository: VietnameseWordsRepository,
+    private val wordSearchListener: OnWordSearchListener
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
@@ -27,7 +28,7 @@ class VESearchViewModel(
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ words -> onSearching(words) },
-                        { throwable -> throwable.localizedMessage })
+                        { wordSearchListener.let { wordSearchListener.onHavingNoWord() } })
             )
         }
     }

@@ -2,6 +2,7 @@ package com.sun.ev_dictionary.ui.common.ve_search
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,7 +16,7 @@ import com.sun.ev_dictionary.data.source.repository.VietnameseWordsRepository
 import com.sun.ev_dictionary.databinding.FragmentCommonSearchBinding
 
 class VESearchFragment : BaseFragment<FragmentCommonSearchBinding>(),
-    OnWordSearchClickListener, TextWatcher {
+    OnWordSearchClickListener, TextWatcher, OnWordSearchListener {
 
     private lateinit var viewModel: VESearchViewModel
     override fun getLayoutResource(): Int = R.layout.fragment_common_search
@@ -42,6 +43,14 @@ class VESearchFragment : BaseFragment<FragmentCommonSearchBinding>(),
         //TODO next pull
     }
 
+    override fun onHavingNoWord() {
+        Toast.makeText(
+            activity,
+            activity!!.getText(R.string.ve_search_msg_no_word),
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
     private fun initViewModel() {
         val viewModelFactory = VESearchViewModelFactory(
             VietnameseWordsRepository.getInstance(
@@ -50,7 +59,7 @@ class VESearchFragment : BaseFragment<FragmentCommonSearchBinding>(),
                     WordDatabase.getInstance(activity!!).vietnameseWordDao,
                     null
                 )
-            )
+            ), this
         )
 
         viewModel = ViewModelProviders.of(activity!!, viewModelFactory)
