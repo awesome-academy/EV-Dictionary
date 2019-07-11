@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textActionBarTitle"
+            style="@style/CommonActionBar"
+            android:background="@color/color_green_800"
+            android:text="@string/common_text_actionbar_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/buttonBack"
+            style="@style/CommonButtonBack"
+            app:layout_constraintBottom_toBottomOf="@id/textActionBarTitle"
+            app:layout_constraintStart_toStartOf="@id/textActionBarTitle"
+            app:layout_constraintTop_toTopOf="@id/textActionBarTitle"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/textWord"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_16"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/textPronunciation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textActionBarTitle" />
+
+        <TextView
+            android:id="@+id/textPronunciation"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_8"
+            app:layout_constraintBottom_toBottomOf="@id/textWord"
+            app:layout_constraintEnd_toStartOf="@id/buttonSpeaker"
+            app:layout_constraintStart_toEndOf="@id/textWord"
+            app:layout_constraintTop_toTopOf="@id/textWord" />
+
+        <TextView
+            android:id="@+id/textMeaning"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/dp_16"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonFav" />
+
+        <ImageButton
+            android:id="@+id/buttonFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_32"
+            android:layout_marginRight="@dimen/dp_32"
+            android:background="@null"
+            android:src="@drawable/ic_star_selector"
+            app:layout_constraintBottom_toBottomOf="@id/textWord"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textWord"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/buttonSpeaker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginRight="@dimen/sp_16"
+            android:background="@null"
+            android:src="@drawable/ic_speaker_blue"
+            app:layout_constraintBottom_toBottomOf="@id/buttonFav"
+            app:layout_constraintEnd_toStartOf="@id/buttonFav"
+            app:layout_constraintTop_toTopOf="@id/buttonFav"
+            tools:ignore="ContentDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

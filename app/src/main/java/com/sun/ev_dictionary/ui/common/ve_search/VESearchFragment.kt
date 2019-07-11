@@ -14,6 +14,8 @@ import com.sun.ev_dictionary.data.source.local.VietnameseWordsLocalDataSource
 import com.sun.ev_dictionary.data.source.local.WordDatabase
 import com.sun.ev_dictionary.data.source.repository.VietnameseWordsRepository
 import com.sun.ev_dictionary.databinding.FragmentCommonSearchBinding
+import com.sun.ev_dictionary.ui.common.ve_search_result.VESearchResultFragment
+import com.sun.ev_dictionary.utils.ActivityUtils
 
 class VESearchFragment : BaseFragment<FragmentCommonSearchBinding>(),
     OnWordSearchClickListener, TextWatcher, OnWordSearchListener {
@@ -40,7 +42,7 @@ class VESearchFragment : BaseFragment<FragmentCommonSearchBinding>(),
     }
 
     override fun onWordClicked(vietnameseWord: VietnameseWord) {
-        //TODO next pull
+        navigateToResultScreen(vietnameseWord)
     }
 
     override fun onHavingNoWord() {
@@ -88,6 +90,14 @@ class VESearchFragment : BaseFragment<FragmentCommonSearchBinding>(),
         binding.textSearch.addTextChangedListener(this)
         binding.buttonBack.setOnClickListener { activity!!.finish() }
         binding.textActionBarTitle.setText(R.string.home_vietnamese_english_dictionary)
+    }
+
+    private fun navigateToResultScreen(vietnameseWord: VietnameseWord) {
+        ActivityUtils.replaceFragment(
+            activity!!.supportFragmentManager,
+            R.id.frameContainer,
+            VESearchResultFragment.newInstance(vietnameseWord)
+        )
     }
 
     companion object {
