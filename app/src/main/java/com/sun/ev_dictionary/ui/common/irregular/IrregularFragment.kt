@@ -8,7 +8,7 @@ class IrregularFragment : BaseFragment<FragmentCommonSearchBinding>() {
     override fun getLayoutResource(): Int = R.layout.fragment_common_search
 
     override fun initData() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     companion object {

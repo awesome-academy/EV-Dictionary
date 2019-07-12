@@ -6,12 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.sun.ev_dictionary.R
+import com.sun.ev_dictionary.ui.common.CommonAction
+import com.sun.ev_dictionary.ui.common.CommonAction.*
 import com.sun.ev_dictionary.ui.common.CommonActivity
-import com.sun.ev_dictionary.ui.common.essential.EssentialFragment
-import com.sun.ev_dictionary.ui.common.ielts.IeltsFragment
-import com.sun.ev_dictionary.ui.common.irregular.IrregularFragment
-import com.sun.ev_dictionary.ui.common.toefl.ToeflFragment
-import com.sun.ev_dictionary.ui.common.toeic.ToeicFragment
 import kotlinx.android.synthetic.main.fragment_dialog_home_menu.*
 
 class ImportantWordDialogFragment : DialogFragment() {
@@ -33,42 +30,15 @@ class ImportantWordDialogFragment : DialogFragment() {
     }
 
     private fun setEventClick() {
-        textEssential.setOnClickListener { chooseEssentialWord() }
-        textIrregular.setOnClickListener { chooseIrregularWord() }
-        textToeic.setOnClickListener { chooseTOEICWord() }
-        textIelts.setOnClickListener { chooseIELTSWord() }
-        textToefl.setOnClickListener { chooseTOEFLWord() }
+        textEssential.setOnClickListener { chooseAction(ESSENTIAL) }
+        textIrregular.setOnClickListener { chooseAction(IRREGULAR) }
+        textToeic.setOnClickListener { chooseAction(TOEIC) }
+        textIelts.setOnClickListener { chooseAction(IELTS) }
+        textToefl.setOnClickListener { chooseAction(TOEFL) }
     }
 
-    private fun chooseEssentialWord() {
-        startActivity(
-            CommonActivity.getIntent(activity!!, EssentialFragment::class.java.simpleName)
-        )
-    }
-
-    private fun chooseIrregularWord() {
-        startActivity(
-            CommonActivity.getIntent(activity!!, IrregularFragment::class.java.simpleName)
-        )
-    }
-
-    private fun chooseTOEICWord() {
-        startActivity(
-            CommonActivity.getIntent(activity!!, ToeicFragment::class.java.simpleName)
-        )
-    }
-
-    private fun chooseIELTSWord() {
-        startActivity(
-            CommonActivity.getIntent(activity!!, IeltsFragment::class.java.simpleName)
-        )
-    }
-
-    private fun chooseTOEFLWord() {
-        startActivity(
-            CommonActivity.getIntent(activity!!, ToeflFragment::class.java.simpleName)
-        )
-    }
+    private fun chooseAction(action: CommonAction) =
+        startActivity(CommonActivity.getIntent(activity!!, action))
 
     companion object {
         @JvmStatic
