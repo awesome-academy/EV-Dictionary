@@ -16,9 +16,10 @@ import com.sun.ev_dictionary.data.source.local.EnglishWordsLocalDataSource
 import com.sun.ev_dictionary.data.source.local.WordDatabase
 import com.sun.ev_dictionary.data.source.repository.EnglishWordsRepository
 import com.sun.ev_dictionary.databinding.ActivityHomeBinding
+import com.sun.ev_dictionary.ui.common.CommonAction
 import com.sun.ev_dictionary.ui.common.CommonActivity
-import com.sun.ev_dictionary.ui.common.ve_search.VESearchFragment
 import com.sun.ev_dictionary.ui.ev_search_result.EVSearchResultActivity
+import com.sun.ev_dictionary.ui.home.dialog_important_word.ImportantWordDialogFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
 
@@ -77,9 +78,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), OnWordSearchClickListe
         buttonMicrophone.setOnClickListener { speechToText() }
         textVED.setOnClickListener {
             navigateToOtherScreen(
-                CommonActivity.getIntent(this, VESearchFragment::class.java.simpleName)
+                CommonActivity.getIntent(this, CommonAction.VE_SEARCH)
             )
         }
+        textImportantWords.setOnClickListener { showPopupImportantWords() }
     }
 
     private fun setWordsSearchAdapter() {
@@ -114,6 +116,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), OnWordSearchClickListe
 
     private fun navigateToOtherScreen(intent: Intent) {
         startActivity(intent)
+    }
+
+    private fun showPopupImportantWords() {
+        ImportantWordDialogFragment.newInstance()
+            .show(supportFragmentManager, ImportantWordDialogFragment::class.java.simpleName)
     }
 
     companion object {
