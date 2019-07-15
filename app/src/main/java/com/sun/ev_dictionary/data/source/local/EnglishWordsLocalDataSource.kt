@@ -4,13 +4,9 @@ import com.sun.ev_dictionary.data.model.EnglishWord
 import com.sun.ev_dictionary.data.source.EnglishWordsDataSource
 import com.sun.ev_dictionary.data.source.local.dao.EnglishWordDao
 import com.sun.ev_dictionary.utils.Constants
-import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_1
-import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_2
-import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_3_END
-import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_3_START
-import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_4_END
-import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_5_END
-import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_TYPE_5_START
+import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_END_TYPE_1
+import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_END_TYPE_2
+import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_START
 import com.sun.ev_dictionary.utils.SharedPreference
 import com.sun.ev_dictionary.utils.StringUtils
 import io.reactivex.Observable
@@ -53,63 +49,28 @@ class EnglishWordsLocalDataSource private constructor(
 
     private fun convertLineToEnglishWord(line: String): EnglishWord =
         when {
-            line.contains(EN_WORD_REGEX_TYPE_1) -> {
-                val word: String = line.substring(0, line.indexOf(EN_WORD_REGEX_TYPE_1))
-                val meaning: String = line.substring(
-                    line.indexOf(EN_WORD_REGEX_TYPE_1) + EN_WORD_REGEX_TYPE_1.length,
-                    line.length
-                )
-                EnglishWord(word, null, StringUtils.replaceChars(meaning))
-            }
-            line.contains(EN_WORD_REGEX_TYPE_2) -> {
-                val word: String = line.substring(0, line.indexOf(EN_WORD_REGEX_TYPE_2))
-                val meaning: String = line.substring(
-                    line.indexOf(EN_WORD_REGEX_TYPE_2) + EN_WORD_REGEX_TYPE_2.length,
-                    line.length
-                )
-                EnglishWord(word, null, StringUtils.replaceChars(meaning))
-            }
-            line.contains(EN_WORD_REGEX_TYPE_3_START) && line.contains(EN_WORD_REGEX_TYPE_3_END) -> {
+            line.contains(EN_WORD_REGEX_START) && line.contains(EN_WORD_REGEX_END_TYPE_1) -> {
                 val word: String =
-                    line.substring(0, line.indexOf(EN_WORD_REGEX_TYPE_3_START))
+                    line.substring(0, line.indexOf(EN_WORD_REGEX_START))
                 val pronunciation: String = line.substring(
-                    line.indexOf(EN_WORD_REGEX_TYPE_3_START) + EN_WORD_REGEX_TYPE_3_START.length,
-                    line.indexOf(EN_WORD_REGEX_TYPE_3_END)
+                    line.indexOf(EN_WORD_REGEX_START) + EN_WORD_REGEX_START.length,
+                    line.indexOf(EN_WORD_REGEX_END_TYPE_1)
                 )
                 val meaning: String = line.substring(
-                    line.indexOf(EN_WORD_REGEX_TYPE_3_END) + EN_WORD_REGEX_TYPE_3_END.length,
+                    line.indexOf(EN_WORD_REGEX_END_TYPE_1) + EN_WORD_REGEX_END_TYPE_1.length,
                     line.length
                 )
                 EnglishWord(word, pronunciation, StringUtils.replaceChars(meaning))
             }
-            line.contains(EN_WORD_REGEX_TYPE_3_START) && line.contains(EN_WORD_REGEX_TYPE_4_END) -> {
+            else -> {
                 val word: String =
-                    line.substring(0, line.indexOf(EN_WORD_REGEX_TYPE_3_START))
+                    line.substring(0, line.indexOf(EN_WORD_REGEX_START))
                 val meaning: String = line.substring(
-                    line.indexOf(EN_WORD_REGEX_TYPE_3_START) + EN_WORD_REGEX_TYPE_3_START.length,
-                    line.indexOf(EN_WORD_REGEX_TYPE_4_END)
-                )
-                EnglishWord(word, null, StringUtils.replaceChars(meaning))
-            }
-            line.contains(EN_WORD_REGEX_TYPE_5_END) -> {
-                val word: String =
-                    line.substring(0, line.indexOf(EN_WORD_REGEX_TYPE_5_END))
-                val meaning: String = line.substring(
-                    line.indexOf(EN_WORD_REGEX_TYPE_5_END) + EN_WORD_REGEX_TYPE_5_END.length,
+                    line.indexOf(EN_WORD_REGEX_END_TYPE_2) + EN_WORD_REGEX_END_TYPE_2.length,
                     line.length
                 )
                 EnglishWord(word, null, StringUtils.replaceChars(meaning))
             }
-            else -> {
-                val word: String =
-                    line.substring(0, line.indexOf(EN_WORD_REGEX_TYPE_5_START))
-                val meaning: String = line.substring(
-                    line.indexOf(EN_WORD_REGEX_TYPE_5_START) + EN_WORD_REGEX_TYPE_5_START.length,
-                    line.indexOf(EN_WORD_REGEX_TYPE_5_END)
-                )
-                EnglishWord(word, null, StringUtils.replaceChars(meaning))
-            }
-
         }
 
     private fun insertWordsToDatabase(englishWord: EnglishWord): Boolean {
