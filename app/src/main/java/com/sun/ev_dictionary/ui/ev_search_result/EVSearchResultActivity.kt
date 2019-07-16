@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -25,7 +26,10 @@ import kotlinx.android.synthetic.main.activity_ev_search_result.*
 import java.util.*
 
 class EVSearchResultActivity : BaseActivity<ActivityEvSearchResultBinding>(),
-    TextToSpeech.OnInitListener, SearchView.OnQueryTextListener, OnWordSearchClickListener {
+    TextToSpeech.OnInitListener,
+    SearchView.OnQueryTextListener,
+    OnWordSearchClickListener,
+    OnUpdateFavoriteResult {
 
     private lateinit var englishWord: EnglishWord
     private lateinit var viewModel: EVSearchResultViewModel
@@ -82,6 +86,16 @@ class EVSearchResultActivity : BaseActivity<ActivityEvSearchResultBinding>(),
         recyclerWords.visibility = View.GONE
     }
 
+    override fun onComplete(isSuccessful: Boolean) {
+        if (isSuccessful){
+            Toast.makeText(this,getString(R.string.ev_search_notify_success),Toast.LENGTH_SHORT).show()
+        }else  Toast.makeText(this,getString(R.string.ev_search_notify_fail),Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onError(t: Throwable) {
+        Toast.makeText(this,getString(R.string.ev_search_notify_error),Toast.LENGTH_SHORT).show()
+    }
+
     override fun onStop() {
         super.onStop()
         recyclerWords.visibility = View.GONE
@@ -95,7 +109,7 @@ class EVSearchResultActivity : BaseActivity<ActivityEvSearchResultBinding>(),
                     WordDatabase.getInstance(this).englishWordDao,
                     null
                 )
-            )
+            ),this
         )
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)

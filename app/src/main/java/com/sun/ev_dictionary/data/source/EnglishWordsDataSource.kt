@@ -11,5 +11,6 @@ interface EnglishWordsDataSource {
         fun saveInsertedState(): Unit?
         fun getInsertedState(): Boolean?
         fun getSearchingWords(query: String?): Single<List<EnglishWord>>
+        fun updateFavorite(word: String, status: Int) : Observable<Boolean>
     }
 }

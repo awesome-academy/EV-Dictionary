@@ -18,6 +18,9 @@ class EnglishWordsRepository private constructor(
     override fun getInsertedState(): Boolean? = local.getInsertedState()
     override fun saveInsertedState() = local.saveInsertedState()
 
+    override fun updateFavorite(word: String, status: Int): Observable<Boolean> =
+        local.updateFavorite(word, status)
+
     companion object {
         private var INSTANCE: EnglishWordsRepository? = null
 

@@ -41,6 +41,11 @@ class EnglishWordsLocalDataSource private constructor(
     override fun getInsertedState(): Boolean? =
         sharedPreference?.getValueBoolean(Constants.PREF_ENGLISH_WORDS, false)
 
+    override fun updateFavorite(word: String, status: Int): Observable<Boolean> =
+        Observable.fromCallable {
+            updateWordsInDatabase(word, status)
+        }
+
     private fun getLines(bufferedReader: BufferedReader): List<String> {
         bufferedReader.useLines { lines ->
             return lines.toList().also { _numberOfWords = it.size }
@@ -78,6 +83,14 @@ class EnglishWordsLocalDataSource private constructor(
             englishWordDao.insertWord(it)
             return true
         }
+    }
+
+    private fun updateWordsInDatabase(word: String, status: Int): Boolean {
+        val resultStatus = englishWordDao.updateFavorite(word, status)
+        if (resultStatus != 0) {
+            return true
+        }
+        return false
     }
 
     companion object {
