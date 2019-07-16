@@ -3,6 +3,8 @@
 
     <data>
 
+        <import type="android.text.Html" />
+
         <variable
             name="viewModel"
             type="com.sun.ev_dictionary.ui.ev_search_result.EVSearchResultViewModel" />
@@ -37,7 +39,7 @@
             android:layout_marginBottom="@dimen/dp_8"
             android:text="@{viewModel.englishWord.word}"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/textMeaning"
+            app:layout_constraintBottom_toTopOf="@id/srollMeaning"
             app:layout_constraintEnd_toStartOf="@id/textPronunciation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbarEVResult" />
@@ -57,18 +59,24 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@id/textWord" />
 
-        <TextView
-            android:id="@+id/textMeaning"
-            style="@android:style/TextAppearance.Medium"
+        <ScrollView
+            android:id="@+id/srollMeaning"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/dp_8"
-            android:text="@{viewModel.englishWord.meaning}"
-            android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonFav" />
+            app:layout_constraintTop_toBottomOf="@id/buttonFav">
+
+            <TextView
+                android:id="@+id/textMeaning"
+                style="@android:style/TextAppearance.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{Html.fromHtml(viewModel.englishWord.meaning)}"
+                android:textColor="@color/colorAccent" />
+        </ScrollView>
 
         <ImageButton
             android:id="@+id/buttonSpeaker"

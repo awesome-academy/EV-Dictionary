@@ -2,6 +2,7 @@ package com.sun.ev_dictionary.ui.common.ve_search_result
 
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.sun.ev_dictionary.R
@@ -39,7 +40,8 @@ class VESearchResultFragment : BaseFragment<FragmentCommonSearchResultBinding>()
         binding.textActionBarTitle.setText(R.string.home_vietnamese_english_dictionary)
         viewModel.vietnameseWord.observe(this, Observer {
             binding.textWord.text = it.accentedWord
-            binding.textMeaning.text = it.meaning
+            binding.textMeaning.text =
+                HtmlCompat.fromHtml(it.meaning, HtmlCompat.FROM_HTML_MODE_LEGACY)
         })
     }
 
@@ -50,6 +52,7 @@ class VESearchResultFragment : BaseFragment<FragmentCommonSearchResultBinding>()
             }
         })
     }
+
     private fun eventClick() {
         binding.buttonBack.setOnClickListener { activity!!.onBackPressed() }
         binding.buttonSpeaker.setOnClickListener { pronounceWord() }
