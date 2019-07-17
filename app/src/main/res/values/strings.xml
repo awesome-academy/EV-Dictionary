@@ -27,7 +27,5 @@
     <!--ve_search-->
     <string name="ve_search_msg_no_word">Sorry. Having no word for searching</string>
     <!--ev_search-->
-    <string name="ev_search_notify_error">Something went wrong. Try it later</string>
-    <string name="ev_search_notify_fail">Failure. Try it later</string>
     <string name="ev_search_notify_success">Success</string>
 </resources>

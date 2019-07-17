@@ -9,6 +9,7 @@ import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_END_TYPE_2
 import com.sun.ev_dictionary.utils.Constants.EN_WORD_REGEX_START
 import com.sun.ev_dictionary.utils.SharedPreference
 import com.sun.ev_dictionary.utils.StringUtils
+import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import java.io.BufferedReader
@@ -41,10 +42,8 @@ class EnglishWordsLocalDataSource private constructor(
     override fun getInsertedState(): Boolean? =
         sharedPreference?.getValueBoolean(Constants.PREF_ENGLISH_WORDS, false)
 
-    override fun updateFavorite(word: String, status: Int): Observable<Boolean> =
-        Observable.fromCallable {
-            updateWordsInDatabase(word, status)
-        }
+    override fun updateFavorite(word: String, status: Int): Completable =
+        englishWordDao.updateFavorite(word, status)
 
     private fun getLines(bufferedReader: BufferedReader): List<String> {
         bufferedReader.useLines { lines ->
@@ -83,14 +82,6 @@ class EnglishWordsLocalDataSource private constructor(
             englishWordDao.insertWord(it)
             return true
         }
-    }
-
-    private fun updateWordsInDatabase(word: String, status: Int): Boolean {
-        val resultStatus = englishWordDao.updateFavorite(word, status)
-        if (resultStatus != 0) {
-            return true
-        }
-        return false
     }
 
     companion object {

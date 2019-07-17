@@ -28,8 +28,7 @@ import java.util.*
 class EVSearchResultActivity : BaseActivity<ActivityEvSearchResultBinding>(),
     TextToSpeech.OnInitListener,
     SearchView.OnQueryTextListener,
-    OnWordSearchClickListener,
-    OnUpdateFavoriteResult {
+    OnWordSearchClickListener {
 
     private lateinit var englishWord: EnglishWord
     private lateinit var viewModel: EVSearchResultViewModel
@@ -86,16 +85,6 @@ class EVSearchResultActivity : BaseActivity<ActivityEvSearchResultBinding>(),
         recyclerWords.visibility = View.GONE
     }
 
-    override fun onComplete(isSuccessful: Boolean) {
-        if (isSuccessful){
-            Toast.makeText(this,getString(R.string.ev_search_notify_success),Toast.LENGTH_SHORT).show()
-        }else  Toast.makeText(this,getString(R.string.ev_search_notify_fail),Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onError(t: Throwable) {
-        Toast.makeText(this,getString(R.string.ev_search_notify_error),Toast.LENGTH_SHORT).show()
-    }
-
     override fun onStop() {
         super.onStop()
         recyclerWords.visibility = View.GONE
@@ -109,13 +98,29 @@ class EVSearchResultActivity : BaseActivity<ActivityEvSearchResultBinding>(),
                     WordDatabase.getInstance(this).englishWordDao,
                     null
                 )
-            ),this
+            )
         )
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(EVSearchResultViewModel::class.java)
         binding.viewModel = viewModel
         viewModel.setEnglishWord(englishWord)
+        viewModel.isAddToFav.observe(this, Observer { isSuccessful ->
+            checkAddictionSuccess(isSuccessful)
+        })
+        viewModel.throwable.observe(this, Observer { throwable ->
+            handleError(throwable)
+        })
+    }
+
+    private fun checkAddictionSuccess(isSuccessful: Boolean) {
+        if (isSuccessful) {
+            Toast.makeText(this, R.string.ev_search_notify_success, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun handleError(throwable: Throwable) {
+        //TODO - handle error event
     }
 
     private fun setWordsSearchAdapter() {

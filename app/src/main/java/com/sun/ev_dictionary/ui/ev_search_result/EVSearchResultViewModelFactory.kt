@@ -6,15 +6,11 @@ import com.sun.ev_dictionary.data.source.repository.EnglishWordsRepository
 
 @Suppress("UNCHECKED_CAST")
 class EVSearchResultViewModelFactory(
-    private val englishWordsRepository: EnglishWordsRepository,
-    private val onUpdateFavoriteResult: OnUpdateFavoriteResult
+    private val englishWordsRepository: EnglishWordsRepository
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(EVSearchResultViewModel::class.java)) {
-            return EVSearchResultViewModel(
-                englishWordsRepository,
-                onUpdateFavoriteResult
-            ) as T
+            return EVSearchResultViewModel(englishWordsRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

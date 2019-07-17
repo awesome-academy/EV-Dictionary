@@ -37,8 +37,10 @@ class ImportantWordDialogFragment : DialogFragment() {
         textToefl.setOnClickListener { chooseAction(TOEFL) }
     }
 
-    private fun chooseAction(action: CommonAction) =
+    private fun chooseAction(action: CommonAction) {
         startActivity(CommonActivity.getIntent(activity!!, action))
+        this.dismiss()
+    }
 
     companion object {
         @JvmStatic

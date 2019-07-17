@@ -15,6 +15,6 @@ interface VietnameseWordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWord(vietnameseWord: VietnameseWord)
 
-    @Query("SELECT * FROM $TABLE_NAME WHERE $COLUMN_ACCENTED_WORD OR $COLUMN_NON_ACCENTED_WORD LIKE '%' || :query || '%'")
+    @Query("SELECT * FROM $TABLE_NAME WHERE $COLUMN_ACCENTED_WORD OR $COLUMN_NON_ACCENTED_WORD LIKE :query || '%'")
     fun queryWord(query: String?): Single<List<VietnameseWord>>
 }
