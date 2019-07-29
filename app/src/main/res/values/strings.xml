@@ -26,4 +26,6 @@
     <string name="action_search">menu_action_search</string>
     <!--ve_search-->
     <string name="ve_search_msg_no_word">Sorry. Having no word for searching</string>
+    <!--ev_search-->
+    <string name="ev_search_notify_success">Success</string>
 </resources>

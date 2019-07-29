@@ -98,6 +98,8 @@
             android:layout_marginTop="@dimen/dp_16"
             android:layout_marginEnd="@dimen/dp_16"
             android:layout_marginRight="@dimen/dp_16"
+            android:onClick="@{()->viewModel.updateFavorite()}"
+            app:bindingFavoriteStatus="@{viewModel.englishWord.favorite}"
             android:background="@null"
             android:src="@drawable/ic_star_selector"
             app:layout_constraintEnd_toEndOf="parent"

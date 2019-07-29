@@ -19,4 +19,6 @@ object Constants {
     const val VI_WORD_REGEX_TYPE_1_END = "##*"
     const val VI_WORD_REGEX_TYPE_2_END = "##-"
     const val VI_WORD_REGEX_TYPE_3_END = "##"
+    const val FAVORITE_DEFAULT = 0
+    const val FAVORITE_SELECTED = 1
 }

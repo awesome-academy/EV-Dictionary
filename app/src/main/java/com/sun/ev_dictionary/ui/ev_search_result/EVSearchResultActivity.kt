@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -25,7 +26,9 @@ import kotlinx.android.synthetic.main.activity_ev_search_result.*
 import java.util.*
 
 class EVSearchResultActivity : BaseActivity<ActivityEvSearchResultBinding>(),
-    TextToSpeech.OnInitListener, SearchView.OnQueryTextListener, OnWordSearchClickListener {
+    TextToSpeech.OnInitListener,
+    SearchView.OnQueryTextListener,
+    OnWordSearchClickListener {
 
     private lateinit var englishWord: EnglishWord
     private lateinit var viewModel: EVSearchResultViewModel
@@ -102,6 +105,22 @@ class EVSearchResultActivity : BaseActivity<ActivityEvSearchResultBinding>(),
             .get(EVSearchResultViewModel::class.java)
         binding.viewModel = viewModel
         viewModel.setEnglishWord(englishWord)
+        viewModel.isAddToFav.observe(this, Observer { isSuccessful ->
+            checkAddictionSuccess(isSuccessful)
+        })
+        viewModel.throwable.observe(this, Observer { throwable ->
+            handleError(throwable)
+        })
+    }
+
+    private fun checkAddictionSuccess(isSuccessful: Boolean) {
+        if (isSuccessful) {
+            Toast.makeText(this, R.string.ev_search_notify_success, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun handleError(throwable: Throwable) {
+        //TODO - handle error event
     }
 
     private fun setWordsSearchAdapter() {

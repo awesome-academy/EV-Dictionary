@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sun.ev_dictionary.data.source.repository.EnglishWordsRepository
 
+@Suppress("UNCHECKED_CAST")
 class EVSearchResultViewModelFactory(
     private val englishWordsRepository: EnglishWordsRepository
 ) : ViewModelProvider.Factory {

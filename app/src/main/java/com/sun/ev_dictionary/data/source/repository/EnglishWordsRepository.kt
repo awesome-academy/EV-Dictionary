@@ -2,6 +2,7 @@ package com.sun.ev_dictionary.data.source.repository
 
 import com.sun.ev_dictionary.data.model.EnglishWord
 import com.sun.ev_dictionary.data.source.EnglishWordsDataSource
+import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -17,6 +18,9 @@ class EnglishWordsRepository private constructor(
 
     override fun getInsertedState(): Boolean? = local.getInsertedState()
     override fun saveInsertedState() = local.saveInsertedState()
+
+    override fun updateFavorite(word: String, status: Int): Completable =
+        local.updateFavorite(word, status)
 
     companion object {
         private var INSTANCE: EnglishWordsRepository? = null
